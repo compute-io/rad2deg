@@ -66,7 +66,7 @@ $ node ./examples/index.js
 
 ## Notes
 
-If provided an input `array`, the `array` is mutated. If mutation is undesired,
+* 	If provided an input `array`, the `array` is mutated. If mutation is undesired,
 
 ``` javascript
 var data = [ 0, 45, 90, 135, 180 ],
@@ -75,7 +75,14 @@ var data = [ 0, 45, 90, 135, 180 ],
 rad2deg( copy );
 ```
 
-If provided an empty `array`, the function returns `null`.
+*	If provided an empty `array`, the function returns `null`.
+
+*	__Beware__ of floating point errors.
+
+``` javascript
+var deg = rad2deg( Math.PI / 6 );
+// returns 29.999999999999996 instead of 30
+```
 
 
 ## Tests
