@@ -25,7 +25,16 @@
   "keywords": [
     "compute.io",
     "compute",
-    "computation"
+    "computation",
+    "mathematics",
+    "math",
+    "degrees",
+    "radians",
+    "convert",
+    "array",
+    "geometry",
+    "utility",
+    "utils"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/rad2deg/issues"
