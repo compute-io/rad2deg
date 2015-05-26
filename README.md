@@ -22,9 +22,9 @@ To use the module,
 var rad2deg = require( 'compute-rad2deg' );
 ```
 
-#### rad2deg( x )
+#### rad2deg( x[, opts] )
 
-Converts radians to degrees. `x` may be either a numeric `array` or a single numeric value.
+Converts radians to degrees. `x` may be either an `array` of values or a single numeric value.
 
 ``` javascript
 // Single value:
@@ -38,6 +38,55 @@ rad2deg( rads );
 // returns [ 0, 45, 90, 135, 180 ]
 ```
 
+The function accepts two `options`:
+
+*  __copy__: `boolean` indicating whether to return a new `array` containing the computed means. Default: `true`.
+*  __accessor__: accessor `function` for accessing numerical values in object `arrays`.
+
+To mutate the input `array` (e.g. when input values can be discarded or when optimizing memory usage), set the `copy` option to `false`.
+
+``` javascript
+var rads = [ 0, Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI ];
+
+var values = rad2deg( data, {
+	'copy': false
+});
+// returns [ 0, 45, 90, 135, 180 ]
+
+console.log( data === values );
+//returns true
+```
+
+For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values.
+
+``` javascript
+var arr = [
+	{'x':0},
+	{'x':Math.PI/4},
+	{'x':Math.PI/2},
+	{'x':3*Math.PI/4},
+	{'x':Math.PI},
+];
+
+function getValue( d ) {
+	return d.x;
+}
+
+var values = rad2deg( arr, {
+	'accessor': getValue
+});
+// returns [ 0, 45, 90, 135, 180 ]
+
+Notes:
+
+*	If provided an empty `array`, the function returns `null`.
+
+*	__Beware__ of floating point errors.
+
+``` javascript
+var deg = rad2deg( Math.PI / 6 );
+// returns 29.999999999999996 instead of 30
+```
 
 ## Examples
 
@@ -63,33 +112,11 @@ To run the example code from the top-level application directory,
 $ node ./examples/index.js
 ```
 
-
-## Notes
-
-* 	If provided an input `array`, the `array` is mutated. If mutation is undesired,
-
-``` javascript
-var data = [ 0, 45, 90, 135, 180 ],
-	copy = data.slice();
-
-rad2deg( copy );
-```
-
-*	If provided an empty `array`, the function returns `null`.
-
-*	__Beware__ of floating point errors.
-
-``` javascript
-var deg = rad2deg( Math.PI / 6 );
-// returns 29.999999999999996 instead of 30
-```
-
-
 ## Tests
 
 ### Unit
 
-Unit tests use the [Mocha](http://visionmedia.github.io/mocha) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -113,15 +140,15 @@ $ make view-cov
 ```
 
 
+---
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT). 
+[MIT license](http://opensource.org/licenses/MIT).
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. The Compute.io Authors.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-rad2deg.svg
