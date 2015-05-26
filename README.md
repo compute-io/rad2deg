@@ -76,6 +76,7 @@ var values = rad2deg( arr, {
 	'accessor': getValue
 });
 // returns [ 0, 45, 90, 135, 180 ]
+```
 
 Notes:
 
