@@ -40,7 +40,7 @@ rad2deg( rads );
 
 The function accepts two `options`:
 
-*  __copy__: `boolean` indicating whether to return a new `array` containing the computed means. Default: `true`.
+*  __copy__: `boolean` indicating whether to return a new `array` containing the converted degrees. Default: `true`.
 *  __accessor__: accessor `function` for accessing numerical values in object `arrays`.
 
 To mutate the input `array` (e.g. when input values can be discarded or when optimizing memory usage), set the `copy` option to `false`.
