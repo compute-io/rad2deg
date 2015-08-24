@@ -104,7 +104,10 @@ var data = [
 	{'x':[4,Math.PI]}
 ];
 
-var out = rad2deg( data, 'x|1', '|' );
+var out = rad2deg( data, {
+	'path': 'x|1',
+	'sep': '|'
+});
 /*
 	[
 		{'x':[0,0]},
@@ -236,6 +239,13 @@ bool = ( mat === out );
 		'dtype': 'int8'
 	});
 	// returns Int8Array( [0,0,0] );
+	```
+
+*	__Beware__ of floating point errors.
+
+	``` javascript
+	var deg = rad2deg( Math.PI / 6 );
+	// returns 29.999999999999996 instead of 30
 	```
 
 ## Examples
